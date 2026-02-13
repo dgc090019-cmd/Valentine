@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>❤️</title>
+
+<style>
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  text-align: center;
+  overflow-x: hidden;
+}
+
+#start {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heart-btn {
+  width: 150px;
+  height: 150px;
+  background: #ff4d6d;
+  position: relative;
+  transform: rotate(-45deg);
+  cursor: pointer;
+}
+
+.heart-btn::before,
+.heart-btn::after {
+  content: "";
+  width: 150px;
+  height: 150px;
+  background: #ff4d6d;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart-btn::before { top: -75px; left: 0; }
+.heart-btn::after { left: 75px; top: 0; }
+
+.heart-text {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+section {
+  min-height: 100vh;
+  padding: 60px 20px;
+}
+
+.hidden { display: none; }
+
+.gallery {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.gallery img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.checkbox-group {
+  margin-top: 30px;
+  font-size: 20px;
+}
+
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 24px;
+  animation: floatUp 4s linear forwards;
+}
+
+@keyframes floatUp {
+  to { transform: translateY(-100vh); opacity: 0; }
+}
+
+#final {
+  height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" src="song.mp3"></audio>
+
+<div id="start">
+  <div class="heart-btn" onclick="startLove()">
+    <div class="heart-text">Click Here</div>
+  </div>
+</div>
+
+<section id="photos" class="hidden">
+  <h1>❤️ Us ❤️</h1>
+  <div class="gallery">
+    <img src="photos/us1.jpg">
+    <img src="photos/us2.jpg">
+    <img src="photos/us3.jpg">
+  </div>
+</section>
+
+<section id="question" class="hidden">
+  <h1>Baba, will you be my Valentine? 💌</h1>
+  <div class="checkbox-group">
+    <label><input type="checkbox" onclick="sayYes()"> Yes 💖</label><br><br>
+    <label><input type="checkbox" disabled> No 😢</label>
+  </div>
+</section>
+
+<div id="final">I love you ❤️</div>
+
+<script>
+function startLove() {
+  document.getElementById("music").play();
+  document.getElementById("start").style.display = "none";
+  document.getElementById("photos").classList.remove("hidden");
+  document.getElementById("question").classList.remove("hidden");
+}
+
+function sayYes() {
+  document.body.innerHTML = '<div id="final">I love you ❤️</div>';
+  document.getElementById("final").style.display = "flex";
+
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 4000);
+  }, 300);
+}
+</script>
+
+</body>
+</html>
